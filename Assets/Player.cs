@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
-    public Rigidbody2D rb;
-    private GameObject hook;
+    [SerializeField]
+    Rigidbody2D rb;
+
+    [NonSerialized]
+    GameObject hook;
+
     public float releaseTime = .15f;
     private bool isPressed = false;
 
@@ -16,8 +22,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.Log("The mouse click was released");
+        isPressed = false;
+        rb.isKinematic = false;
+
+        StartCoroutine(Release());
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("The mouse click");
         isPressed = true;
         rb.isKinematic = true;
         hook = new GameObject();
@@ -25,14 +41,6 @@ public class Player : MonoBehaviour
         hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         hook.GetComponent<Rigidbody2D>().position = rb.position;
         GetComponent<SpringJoint2D>().enabled = true;
-    }
-
-    void OnMouseUp()
-    {
-        isPressed = false;
-        rb.isKinematic = false;
-
-        StartCoroutine(Release());
     }
 
     IEnumerator Release()
