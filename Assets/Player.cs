@@ -8,23 +8,41 @@ public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     [SerializeField]
     Rigidbody2D rb;
 
+    [SerializeField]
+    float releaseTime = .15f;
+
+    [SerializeField]
+    Transform mainCamera;
+
+    [SerializeField]
+    SpringJoint2D sj;
+
     [NonSerialized]
     GameObject hook;
 
-    public float releaseTime = .15f;
-    private bool isPressed = false;
+    [NonSerialized]
+    Rigidbody2D hookRb;
 
-    void Update()
+    [NonSerialized]
+    bool isPressed = false;
+
+    void LateUpdate()
     {
         if (isPressed)
         {
             rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+        else
+        {
+            if (transform.position.y > mainCamera.position.y)
+            {
+                mainCamera.position = new Vector3(mainCamera.position.x, transform.position.y, mainCamera.position.z);
+            }
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("The mouse click was released");
         isPressed = false;
         rb.isKinematic = false;
 
@@ -33,21 +51,20 @@ public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("The mouse click");
         isPressed = true;
         rb.isKinematic = true;
         hook = new GameObject();
-        hook.AddComponent<Rigidbody2D>();
-        hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        hook.GetComponent<Rigidbody2D>().position = rb.position;
-        GetComponent<SpringJoint2D>().enabled = true;
+        hookRb = hook.AddComponent<Rigidbody2D>();
+        hookRb.bodyType = RigidbodyType2D.Dynamic;
+        hookRb.position = rb.position;
+        sj.enabled = true;
     }
 
     IEnumerator Release()
     {
         yield return new WaitForSeconds(releaseTime);
 
-        GetComponent<SpringJoint2D>().enabled = false;
+        sj.enabled = false;
         Destroy(hook);
     }
 }
