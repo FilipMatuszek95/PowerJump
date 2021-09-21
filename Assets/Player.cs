@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
@@ -27,9 +26,6 @@ public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     [NonSerialized]
     bool isPressed = false;
 
-    [NonSerialized]
-    bool playerIsKillable = false;
-
     void LateUpdate()
     {
         if (isPressed)
@@ -42,20 +38,16 @@ public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
             {
                 mainCamera.position = new Vector3(mainCamera.position.x, transform.position.y, mainCamera.position.z);
             }
-        }
-
-        if (playerIsKillable)
-        {
-            if (rb.position.y + 4 < mainCamera.position.y)
+            else
             {
-                SceneManager.LoadScene("MainLevel");
+                mainCamera.position = new Vector3(mainCamera.position.x, transform.position.y + 2, mainCamera.position.z);
             }
+                
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        playerIsKillable = true;
         isPressed = false;
         rb.isKinematic = false;
 
@@ -65,7 +57,6 @@ public class Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
-        playerIsKillable = false;
         rb.isKinematic = true;
         hook = new GameObject();
         hookRb = hook.AddComponent<Rigidbody2D>();

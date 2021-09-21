@@ -201,8 +201,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246447746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0087, y: -3.7783, z: 0}
-  m_LocalScale: {x: 1.167181, y: 1.0424805, z: 1}
+  m_LocalPosition: {x: -0.0087, y: -6.0004, z: 0}
+  m_LocalScale: {x: 1.167181, y: 2.2468581, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -384,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 990604033}
@@ -613,8 +613,8 @@ GameObject:
   - component: {fileID: 2098551695}
   - component: {fileID: 2098551697}
   - component: {fileID: 2098551699}
-  - component: {fileID: 2098551694}
   - component: {fileID: 2098551698}
+  - component: {fileID: 2098551694}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -622,8 +622,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &2098551694
-BoxCollider2D:
+--- !u!58 &2098551694
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -635,19 +635,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0015178919, y: 0.010626078}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.61, y: 0.61}
-    newSize: {x: 0.61, y: 0.61}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.0014925599, y: 0.0074625015}
   serializedVersion: 2
-  m_Size: {x: 0.5887482, y: 0.58874786}
-  m_EdgeRadius: 0
+  m_Radius: 0.29306
 --- !u!212 &2098551695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -708,7 +698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098551693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.36, y: -0.36, z: 0}
+  m_LocalPosition: {x: -1.39, y: -1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -742,7 +732,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098551693}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
@@ -750,7 +740,7 @@ SpringJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -1.36, y: -0.36}
+  m_ConnectedAnchor: {x: -1.39, y: -1.57}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
